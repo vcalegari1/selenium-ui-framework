@@ -1,4 +1,4 @@
-package com.viniciuscalegari.utils;
+package com.qaframework.utils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
