@@ -26,6 +26,23 @@ public class BasePage {
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
+    protected void waitForInvisibility(By locator) {
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+    }
+
+    protected void safeClick(By locator) {
+        int attempts = 0;
+        while (attempts < 2) {
+            try {
+                waitForClickable(locator).click();
+                return;
+            } catch (org.openqa.selenium.StaleElementReferenceException e) {
+                attempts++;
+            }
+        }
+        throw new RuntimeException("Element still stale after retry: " + locator);
+    }
+
     protected void click(By locator) {
         waitForClickable(locator).click();
     }
